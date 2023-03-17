@@ -189,8 +189,8 @@ io.on('connection', async (socket) => {
         const game = users[user].game;
 
         const testForUser = games[game].selectedUsers;
-        //if(testForUser.indexOf(user) !== -1) return respond('You\'ve already selected!');
-        //if(games[game].czar == user) return respond('You\'re the Daddy!');
+        if(testForUser.indexOf(user) !== -1) return respond('You\'ve already selected!');
+        if(games[game].czar == user) return respond('You\'re the Daddy!');
         if(games[game].cards.calls[0].pick !== selected.length) return respond('Please pick the right number of cards');
 
         const option = {
@@ -201,7 +201,7 @@ io.on('connection', async (socket) => {
         games[game].selected.push(option);
         games[game].selectedUsers.push(user);
 
-        if(games[game].selectedUsers.length == Object.keys(games[game].players).length) {
+        if(games[game].selectedUsers.length == Object.keys(games[game].players).length - 1) {
             games[game].picking = true;
             io.to(game).emit('selections', { selections: games[game].selected });
         }
