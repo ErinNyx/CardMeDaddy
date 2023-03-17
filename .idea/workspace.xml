@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cbd86f9a-8547-4a55-8efb-f0fdbc5d43bf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Create Game/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Create Game/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/Game/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Game/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +64,7 @@
       <workItem from="1678990387956" duration="657000" />
       <workItem from="1678993272837" duration="3371000" />
       <workItem from="1679017625358" duration="3000" />
-      <workItem from="1679087056832" duration="2715000" />
+      <workItem from="1679087056832" duration="3498000" />
     </task>
     <servers />
   </component>

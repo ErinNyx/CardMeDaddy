@@ -26,9 +26,11 @@ socket.on('remove-response', () => {
     selected = undefined;
 
     document.querySelectorAll('.checked').forEach((c) => {
-        c.classList.remove('.checked');
         c.style.background = '';
         c.checked = false;
+
+        console.log(c);
+        c.classList.remove('.checked');
     })
 })
 
