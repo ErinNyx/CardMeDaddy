@@ -28,6 +28,7 @@ socket.on('remove-response', () => {
     document.querySelectorAll('.checked').forEach((c) => {
         c.classList.remove('.checked');
         c.style.background = '';
+        c.checked = false;
     })
 })
 
@@ -158,7 +159,7 @@ const Game = () => {
                         </div>
                         <div className={ 'points' }>
                             <p>Points:</p>
-                            { game.players.map((p) => (<>{ p.username }: { p.points }</>)) }
+                            { game.players.map((p) => (<>{ p.username }: { p.points }<br /></>)) }
                         </div>
                         <div className={ 'hand' }>
 

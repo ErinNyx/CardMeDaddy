@@ -236,14 +236,13 @@ io.on('connection', async (socket) => {
         var temp;
 
         while(!users[games[game].joined[0]]) {
-            delete games[game].players[games[game].joined[0]];
             temp = games[game].joined.shift();
         }
 
-        games[game].joined.push(temp);
-
         games[game].czar = games[game].joined[0];
         games[game].czarName = users[games[game].joined[0]].username;
+
+        games[game].joined.push(temp);
 
         games[game].selected = [];
         games[game].selectedUsers = [];
