@@ -139,7 +139,6 @@ const Game = () => {
                                                 document.querySelectorAll('.checked')[0].classList.remove('checked');
                                             }
 
-
                                             e.target.parentElement.value ? e.target.parentElement.value = null : e.target.parentElement.value = checked.length;
 
                                             e.target.parentElement.style.background == '' ?

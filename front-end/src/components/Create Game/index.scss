@@ -109,3 +109,36 @@ i:hover .hide-tip {
   width: 25vw;
   top: 8%;
 }
+
+.settings {
+  position: fixed;
+  right: 1vw;
+
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  width: 15vw;
+
+  justify-content: space-around;
+  align-items: flex-start;
+
+  padding: 0!important;
+
+  label {
+    margin: 2vh!important;
+  }
+
+  input:not([type='checkbox']) {
+    margin: 1vh;
+    height: 25%;
+
+    padding: 1vh;
+    width: 35%;
+
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background: #2d2d2d;
+    border-radius: 1vh;
+    color: white!important;
+  }
+}

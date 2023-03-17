@@ -222,7 +222,6 @@ io.on('connection', async (socket) => {
         games[game].players[winner].points += 1;
 
         for(var i in games[game].selected) {
-            if(games[game].players[i].id !== games[game].czar) {
                 for(var j = 0; j < games[game].selected[i].selected.length; j++) {
                     games[game].players[games[game].selected[i].id].hand =
                         games[game].players[games[game].selected[i].id].hand.filter(c =>
@@ -230,8 +229,6 @@ io.on('connection', async (socket) => {
 
                     games[game].players[games[game].selected[i].id].hand.push(games[game].cards.responses.splice(0,1)[0]);
                 }
-
-            }
         }
 
         games[game].cards.calls.shift();

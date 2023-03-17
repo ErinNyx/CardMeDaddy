@@ -28,6 +28,12 @@ const Create = () => {
 
     const crInit = (
         <>
+            <form className={'settings'} onSubmit={(e) => e.preventDefault()}>
+                <label name={ 'blank' }><input type={ 'checkbox' }/>Add Blank Cards?</label>
+                <label name={ 'rounds' }>Enter number of rounds: <input type={'number'} value={'10'} /></label>
+                <label name={ 'timeout' }>If you want to disable player timeout, remove the number in this box. If you want to change how long the timeout is,
+                    this box takes a number in seconds. Default is 5 minutes. <input type={'number'} value={'300'} /></label>
+            </form>
             <a className={ 'cr-add' }>
                 <input type={ 'text' } placeholder={'Custom CR Cast decks can be added with the deck code'} id={ 'cr-cast-input' } />
                 <input type={'submit'} onClick={ (e) => crHandler(e) } value={ 'Add CR Cast Deck' } id={ 'cr-cast-submit' } />
@@ -126,6 +132,9 @@ const Create = () => {
                             e.preventDefault();
 
                             const cah = [], cr =[];
+                            let settings = document.querySelectorAll('.settings label');
+
+                            return console.log(settings);
 
                             document.querySelectorAll('.cah').forEach((d) => {
                                 if(d.checked == true) cah.push(d.value);
