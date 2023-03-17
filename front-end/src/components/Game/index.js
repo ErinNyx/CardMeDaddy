@@ -28,8 +28,6 @@ socket.on('remove-response', () => {
     document.querySelectorAll('.checked').forEach((c) => {
         c.style.background = '';
         c.checked = false;
-
-        console.log(c);
         c.classList.remove('.checked');
     })
 })
@@ -117,9 +115,9 @@ const Game = () => {
 
                                 e.target.parentElement.value ? e.target.parentElement.value = null : e.target.parentElement.value = checked.length;
 
-                                e.target.parentElement.style.background == '' ?
-                                    e.target.parentElement.classList.remove('checked') :
-                                    e.target.parentElement.classList.add('checked');
+                                e.target.checked ?
+                                    e.target.parentElement.classList.add('checked') :
+                                    e.target.parentElement.classList.remove('checked');
                             } } /></>) }</label>)) : (<></>) }
                         </div>
 
@@ -144,9 +142,9 @@ const Game = () => {
 
                                             e.target.parentElement.value ? e.target.parentElement.value = null : e.target.parentElement.value = checked.length;
 
-                                            e.target.parentElement.style.background == '' ?
-                                                e.target.parentElement.classList.remove('checked') :
-                                                e.target.parentElement.classList.add('checked');
+                                            e.target.checked ?
+                                                e.target.parentElement.classList.add('checked') :
+                                                e.target.parentElement.classList.remove('checked');
                                         } } /></label>))
                                     }</>) : (<></>)
                                 ))
