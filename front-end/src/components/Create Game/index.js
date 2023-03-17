@@ -132,9 +132,7 @@ const Create = () => {
                             e.preventDefault();
 
                             const cah = [], cr =[];
-                            let settings = document.querySelectorAll('.settings label');
-
-                            return console.log(settings);
+                            //let settings = document.querySelectorAll('.settings label');
 
                             document.querySelectorAll('.cah').forEach((d) => {
                                 if(d.checked == true) cah.push(d.value);
