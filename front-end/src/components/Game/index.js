@@ -27,8 +27,8 @@ socket.on('remove-response', () => {
 
     document.querySelectorAll('.checked').forEach((c) => {
         c.style.background = '';
-        c.checked = false;
         c.classList.remove('.checked');
+        c.childNodes[1].checked = false;
     })
 })
 
