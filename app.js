@@ -97,7 +97,7 @@ io.on('connection', async (socket) => {
         let options = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         var join = '';
         do {
-            join += options[Math.floor(Math.random() * options.length) - 1];
+            join += options[Math.floor(Math.random() * options.length)];
             if(games[join]) join = '';
         } while(join.length < 5);
 
@@ -261,8 +261,8 @@ app.post('/api/get-data', async (req, res) => {
     const name = await fetch('https://username-generator-api.glique.repl.co/gen', {
         method: 'GET'
     }).then((res) => res.json());
-    const id = await bcrypt.hash(name, 10);
     const username = name.username.split(" ")[0];
+    const id = await bcrypt.hash(username, 10);
 
     const user = { username, id };
 
