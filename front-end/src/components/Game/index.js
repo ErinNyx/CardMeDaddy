@@ -92,6 +92,9 @@ const Game = () => {
 
                             document.querySelectorAll('.checked div').forEach(c => {
                                 var text = c.innerHTML == '_' ? prompt('Enter your text for card #'+ c.parentElement.value) : c.innerHTML;
+
+                                if(c.innerHTML == '_' && !text) return;
+
                                 selected[c.parentElement.value] = text;
                             });
 

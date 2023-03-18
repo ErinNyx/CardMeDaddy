@@ -166,6 +166,9 @@ io.on('connection', async (socket) => {
 
         if(!games[code]) return respond('Something went wrong! Try reloading');
         if(games[code].host !== user) return respond('Something went wrong! Try reloading!');
+        var requiredCards = ((games[code].players.length * 10) * games[code].rounds);
+
+        if(games[code].cards.length < requiredCards) return respond('Not enough cards! You need to add ' + (requiredCards - games[code].cards.length) + ' more.');
 
         games[code].cards.responses = games[code].cards.responses.sort(() => 0.5 - Math.random());
         games[code].cards.calls = games[code].cards.calls.sort(() => 0.5 - Math.random());
