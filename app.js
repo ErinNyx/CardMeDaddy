@@ -261,8 +261,7 @@ app.post('/api/get-data', async (req, res) => {
     const name = await fetch('https://username-generator-api.glique.repl.co/gen', {
         method: 'GET'
     }).then((res) => res.json());
-    var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    const id = await bcrypt.hash(ip, 10);
+    const id = await bcrypt.hash(name, 10);
     const username = name.username.split(" ")[0];
 
     const user = { username, id };
