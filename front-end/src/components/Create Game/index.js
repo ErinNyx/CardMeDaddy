@@ -81,9 +81,6 @@ const Create = () => {
 
     useEffect(() => {
         (async () => {
-            //get cards https://www.restagainsthumanity.com/api/v2/cards?packs=
-            //get packs https://www.restagainsthumanity.com/api/v2/packs
-
             const getPacks = await fetch('https://www.restagainsthumanity.com/api/v2/packs', {
                 method: 'GET'
             }).then((res) => res.json());
@@ -132,7 +129,7 @@ const Create = () => {
                             e.preventDefault();
 
                             const cah = [], cr =[];
-                            //let settings = document.querySelectorAll('.settings label');
+                            let settings = document.querySelectorAll('.settings label input');
 
                             document.querySelectorAll('.cah').forEach((d) => {
                                 if(d.checked == true) cah.push(d.value);
@@ -146,7 +143,8 @@ const Create = () => {
                                 {
                                     id: localStorage.getItem('id'),
                                     cah,
-                                    cr
+                                    cr,
+                                    settings
                                 })
                         }
                         } />

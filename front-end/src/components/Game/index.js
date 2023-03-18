@@ -91,8 +91,8 @@ const Game = () => {
                             }
 
                             document.querySelectorAll('.checked div').forEach(c => {
-                                selected[c.parentElement.value] = c.innerHTML;
-                                console.log(selected)
+                                var text = c.innerHTML == '_' ? prompt('Enter your text for card #'+ c.parentElement.value) : c.innerHTML;
+                                selected[c.parentElement.value] = text;
                             });
 
                             socket.emit('confirm-selection', { selected, user });

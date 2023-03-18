@@ -35,6 +35,11 @@ io.on('connection', async (socket) => {
         io.to(socket.id).emit('alert', msg);
     }
 
+    function gameCleanup(game) {
+        for(var i in games[game].players) users[games[game].players[i].id].game = false;
+        delete games[users[user].game];
+    }
+
     socket.on('online', async (data) => {
         if(!users[data.id]) users[data.id] = {
             username: data.username,
@@ -56,7 +61,7 @@ io.on('connection', async (socket) => {
     })
 
     socket.on('start-game', async (data) => {
-        const { id, cah, cr } = data;
+        const { id, cah, cr, settings } = data;
 
         if(!id || (id && !users[id])) return respond('Something went wrong! No need to reload (yet) wait a moment and try again. ' +
             'If it doesn\'t work again, then reload. If the issue persists please contact the webmaster at ' +
@@ -101,12 +106,23 @@ io.on('connection', async (socket) => {
             if(games[join]) join = '';
         } while(join.length < 5);
 
+        const blank = {
+            text: '_'
+        }
+
+        if(settings[0].checked) {
+            var percent = Math.floor(cards.responses.length * (0.25));
+            for(var i = 0; i < percent; i++) {
+                cards.responses.push(blank);
+            }
+        }
+
         games[join] = {
             cards,
             players: [],
             czar: '',
             czarName: '',
-            rounds: 10,
+            rounds: settings[1].value,
             round: 1,
             host: id,
             started: false,
@@ -114,7 +130,8 @@ io.on('connection', async (socket) => {
             joined: [],
             selected: [],
             selectedUsers: [],
-            picking: false
+            picking: false,
+            timeout: settings[2].value
         }
 
         games[join].players[id] = { id, username: users[id].username, hand: [], points: 0 }
@@ -173,12 +190,21 @@ io.on('connection', async (socket) => {
 
         if(!games[users[user].game]) return respond('You\'re not in a game!');
         if(games[users[user].game].host == user) {
-            delete games[users[user].game];
-
+            io.to(users[user].game).emit('redirect', '/');
+            return gameCleanup(users[user].game);
         }
 
-        users[user].game = false;
-        return socket.emit('redirect', '/');
+        delete games[users[user].game].players[user];
+        var indexOne = games[users[user].game].joined.indexOf(user);
+
+        games[users[user].game].joined.splice(indexOne, 1);
+
+        if(games[users[user].game].selectedUsers.indexOf(user) > -1) {
+            var indexTwo = games[users[user].game].selectedUsers.indexOf(user);
+            games[users[user].game].selectedUsers.splice(indexOne, 1);
+
+            games[users[user].game].selected = games[users[user].game].selected.filter(u => u.id !== user);
+        }
     });
 
     socket.on('confirm-selection', async (data) => {
@@ -248,6 +274,21 @@ io.on('connection', async (socket) => {
 
         games[game].selected = [];
         games[game].selectedUsers = [];
+
+        games[game].rounds--;
+
+        if(games[game].rounds == 0) {
+            const a = Object.values(game[game].players);
+            const points = Math.max(...a.map(p => p.points));
+
+            const winners = a.filter(p => p.points == points);
+            const formatted = winners.join(' and ').trimEnd();
+
+            io.to(game[game].code).emit('alert', formatted + ' won!');
+            io.to(game[game].code).emit('redirect', '/');
+
+            gameCleanup(game);
+        }
     })
 });
 
