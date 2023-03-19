@@ -26,9 +26,9 @@ socket.on('remove-response', () => {
     selected = undefined;
 
     document.querySelectorAll('.checked').forEach((c) => {
+        c.childNodes[1].checked = false;
         c.style.background = '';
         c.classList.remove('.checked');
-        c.childNodes[1].checked = false;
     })
 })
 
@@ -94,7 +94,7 @@ const Game = () => {
                                 var text = c.innerHTML == '_' ? prompt('Enter your text for card #'+ c.parentElement.value) : c.innerHTML;
 
                                 if(c.innerHTML == '_' && !text) return;
-
+                                c.checked = false;
                                 selected[c.parentElement.value] = text;
                             });
 

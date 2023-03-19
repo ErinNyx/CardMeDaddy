@@ -278,7 +278,7 @@ io.on('connection', async (socket) => {
         games[game].rounds--;
 
         if(games[game].rounds == 0) {
-            const a = Object.values(game[game].players);
+            const a = Object.values(games[game].players);
             const points = Math.max(...a.map(p => p.points));
 
             const winners = a.filter(p => p.points == points);
