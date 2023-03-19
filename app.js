@@ -285,8 +285,8 @@ io.on('connection', async (socket) => {
             const winners = a.filter(p => p.points == points);
             const formatted = winners.join(' and ').trimEnd();
 
-            io.to(game[game].code).emit('alert', formatted + ' won!');
-            io.to(game[game].code).emit('redirect', '/');
+            io.to(games[game].code).emit('alert', formatted + ' won!');
+            io.to(games[game].code).emit('redirect', '/');
 
             gameCleanup(game);
         }
