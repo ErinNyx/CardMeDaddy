@@ -3,7 +3,6 @@ import Navbar from '../Navbar';
 import { io } from 'socket.io-client';
 import { useState, useEffect } from "react";
 import {NavLink} from "react-router-dom";
-import {toBePartiallyChecked} from "@testing-library/jest-dom/dist/matchers";
 
 const socket = io();
 socket.on('alert', (msg) => {
@@ -47,7 +46,6 @@ const Create = () => {
 
     async function crHandler(e) {
         e.preventDefault();
-        // https://api.crcast.cc/v1/cc/decks/
         var id = document.getElementById('cr-cast-input').value;
         if(!id) return alert('Please enter a CR Cast ID');
 

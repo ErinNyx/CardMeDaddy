@@ -95,6 +95,8 @@ const Game = () => {
 
                                 if(c.innerHTML == '_' && !text) return;
                                 c.checked = false;
+                                c.classList.remove('checked');
+                                c.background = '';
                                 selected[c.parentElement.value] = text;
                             });
 
