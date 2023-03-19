@@ -111,7 +111,7 @@ io.on('connection', async (socket) => {
         }
 
         if(settings[0]) {
-            var percent = Math.floor(cards.responses.length * (0.25));
+            var percent = Math.floor(cards.responses.length * (0.45));
             for(var i = 0; i < percent; i++) {
                 cards.responses.push(blank);
             }
@@ -147,6 +147,7 @@ io.on('connection', async (socket) => {
         if(!users[id]) return respond('Something went wrong! Try reloading');
         if(users[id].game) return socket.emit('redirect', '/game/'+users[id].game);
         if(!games[code.toUpperCase()]) return respond('Invalid game, please check that you have the right code');
+        if(games[code.toUpperCase()].started) return respond('That game has already started!');
 
         users[id].game = code.toUpperCase();
 
