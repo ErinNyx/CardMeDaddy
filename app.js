@@ -37,7 +37,7 @@ io.on('connection', async (socket) => {
 
     function gameCleanup(game) {
         for(var i in games[game].players) users[games[game].players[i].id].game = false;
-        delete games[users[user].game];
+        delete games[game];
     }
 
     socket.on('online', async (data) => {
@@ -110,7 +110,7 @@ io.on('connection', async (socket) => {
             text: '_'
         }
 
-        if(settings[0].checked) {
+        if(settings[0]) {
             var percent = Math.floor(cards.responses.length * (0.25));
             for(var i = 0; i < percent; i++) {
                 cards.responses.push(blank);
@@ -122,7 +122,7 @@ io.on('connection', async (socket) => {
             players: [],
             czar: '',
             czarName: '',
-            rounds: settings[1].value,
+            rounds: settings[1],
             round: 1,
             host: id,
             started: false,
@@ -131,7 +131,7 @@ io.on('connection', async (socket) => {
             selected: [],
             selectedUsers: [],
             picking: false,
-            timeout: settings[2].value
+            timeout: settings[2]
         }
 
         games[join].players[id] = { id, username: users[id].username, hand: [], points: 0 }
@@ -166,9 +166,10 @@ io.on('connection', async (socket) => {
 
         if(!games[code]) return respond('Something went wrong! Try reloading');
         if(games[code].host !== user) return respond('Something went wrong! Try reloading!');
-        var requiredCards = ((games[code].players.length * 10) * games[code].rounds);
+        var requiredCards = ((games[code].joined.length * 10) * games[code].rounds);
 
-        if(games[code].cards.length < requiredCards) return respond('Not enough cards! You need to add ' + (requiredCards - games[code].cards.length) + ' more.');
+        if(games[code].cards.responses.length < requiredCards)
+            return respond('Not enough response cards! You need to add ' + (requiredCards - games[code].cards.responses.length) + ' more.');
 
         games[code].cards.responses = games[code].cards.responses.sort(() => 0.5 - Math.random());
         games[code].cards.calls = games[code].cards.calls.sort(() => 0.5 - Math.random());
@@ -177,10 +178,6 @@ io.on('connection', async (socket) => {
             const hand = games[code].cards.responses.splice(0, 10);
             games[code].players[i].hand = hand;
         }
-
-        /**
-         * Really crap workaround I know but the normal object iterations weren't working
-         */
 
         games[code].czar = games[code].joined[0];
         games[code].czarName = games[code].players[games[code].joined[0]].username;

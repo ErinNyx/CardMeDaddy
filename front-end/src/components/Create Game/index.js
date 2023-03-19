@@ -125,11 +125,15 @@ const Create = () => {
 
                     <div id={ 'create-game-top' }>
                         <input type={'text'} placeholder={ 'Password, if left blank game will be public' } />
-                        <input type={ 'submit' } value={ 'Start Game!' } onClick={ (e) => {
+                        <input type={ 'submit' } value={ 'Start Game!' } onClick={ async (e) => {
                             e.preventDefault();
 
-                            const cah = [], cr =[];
-                            let settings = document.querySelectorAll('.settings label input');
+                            const cah = [], cr =[], settings = [];
+                            let set = document.querySelectorAll('.settings label input');
+
+                            settings.push(set[0].checked);
+                            settings.push(set[1].value);
+                            settings.push(set[2].value);
 
                             document.querySelectorAll('.cah').forEach((d) => {
                                 if(d.checked == true) cah.push(d.value);
