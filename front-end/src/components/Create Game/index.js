@@ -4,9 +4,16 @@ import { io } from 'socket.io-client';
 import { useState, useEffect } from "react";
 import {NavLink} from "react-router-dom";
 
+var calls = 0, responses = 0;
+
 const socket = io();
 socket.on('alert', (msg) => {
     alert(msg);
+});
+
+socket.on('cards', (data) => {
+    calls = data.calls;
+    responses = data.responses;
 });
 
 socket.on('redirect', (link) => {
@@ -25,13 +32,16 @@ const Create = () => {
         </div>
     );
 
+    const modalInit = (
+        <></>
+    );
+
     const crInit = (
         <>
+            <title>Card Me Daddy | Create a Game</title>
             <form className={'settings'} onSubmit={(e) => e.preventDefault()}>
                 <label name={ 'blank' }><input type={ 'checkbox' }/>Add Blank Cards?</label>
-                <label name={ 'rounds' }>Enter number of rounds: <input type={'number'} value={'10'} /></label>
-                <label name={ 'timeout' }>If you want to disable player timeout, remove the number in this box. If you want to change how long the timeout is,
-                    this box takes a number in seconds. Default is 5 minutes. <input type={'number'} value={'300'} /></label>
+                <label name={ 'rounds' }>Enter number of rounds: <input type={'number'} placeholder={'10'} /></label>
             </form>
             <a className={ 'cr-add' }>
                 <input type={ 'text' } placeholder={'Custom CR Cast decks can be added with the deck code'} id={ 'cr-cast-input' } />
@@ -43,6 +53,8 @@ const Create = () => {
 
     const [packs, setPacks] = useState(init);
     let [crPacks, setCR] = useState(crInit);
+
+    let [modal, setModal] = useState(modalInit);
 
     async function crHandler(e) {
         e.preventDefault();
@@ -122,16 +134,16 @@ const Create = () => {
                     </div>
 
                     <div id={ 'create-game-top' }>
-                        <input type={'text'} placeholder={ 'Password, if left blank game will be public' } />
+                        <input type={'text'} placeholder={ 'Password, if left blank game will be public' } id={ 'pass' } />
                         <input type={ 'submit' } value={ 'Start Game!' } onClick={ async (e) => {
                             e.preventDefault();
 
-                            const cah = [], cr =[], settings = [];
+                            const cah = [], cr =[], settings = [], password = document.getElementById('pass').value
+                                ? document.getElementById('pass').value : false;
                             let set = document.querySelectorAll('.settings label input');
 
                             settings.push(set[0].checked);
                             settings.push(set[1].value);
-                            settings.push(set[2].value);
 
                             document.querySelectorAll('.cah').forEach((d) => {
                                 if(d.checked == true) cah.push(d.value);
@@ -146,7 +158,8 @@ const Create = () => {
                                     id: localStorage.getItem('id'),
                                     cah,
                                     cr,
-                                    settings
+                                    settings,
+                                    password
                                 })
                         }
                         } />

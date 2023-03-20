@@ -15,43 +15,34 @@ socket.on('redirect', (link) => {
 
 const Homepage = () => {
     const init = (
-        <div className={ 'game-options' }>
-            <NavLink to={ '/create-game' }>+ Create Game</NavLink>
+        <div className={ 'loading' }>Loading . . . </div>
+    )
 
-            <a onClick={
-                () => {
-                    const page = (
-                        <div className={ 'game-options' }>
-                            <form onSubmit={ (e) => {
-                                e.preventDefault();
-                                socket.emit('join-game', {
-                                    code: document.getElementById('join-code').value,
-                                    id: localStorage.getItem('id')
-                                });
-                            }}>
-                                <input type={ 'text' } placeholder={ 'Game Code' } id={ 'join-code' } />
-                                <input type={ 'submit' } value={ 'Go' } />
-                            </form>
+    const page = (
+        <div className={ 'home' }>
+            <div className={ 'game-options' }>
+                <title>Card Me Daddy</title>
+                <NavLink to={ '/create-game' }>+ Create Game</NavLink>
 
-                            OR
-                            Join Public
-                        </div>
-                    );
-
-                    return setMain(page);
-                }
-            }>+ Join Game</a>
+                <NavLink to={ '/join' }>+ Join Game</NavLink>
+            </div>
         </div>
-    );
+    )
 
     const [main, setMain] = useState(init);
 
+    useEffect(() => {
+        window.addEventListener('storage', () => {
+            setMain(page);
+        });
+    })
+
     return (
-        <div className={ 'home' }>
+        <>
             <Navbar />
 
             { main }
-        </div>
+        </>
     );
 }
 

@@ -3,6 +3,7 @@
 import Homepage from './components/Homepage';
 import Create from './components/Create Game';
 import Game from './components/Game';
+import Join from './components/Join Game';
 
 import React, { useEffect } from "react";
 import { Routes, Route } from 'react-router-dom';
@@ -23,6 +24,7 @@ function App() {
           <Route path={ '/' } element={ <Homepage /> } />
           <Route path={ '/create-game' } element={ <Create /> } />
           <Route path={ '/game/:id' } element={ <Game /> } />
+          <Route path={ '/join' } element={ <Join /> } />
       </Routes>
   );
 }

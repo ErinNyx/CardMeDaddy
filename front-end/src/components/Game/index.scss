@@ -179,21 +179,18 @@ label.white-card {
 
 .points {
   position: fixed;
-  right: 5vh;
+  right: -1vw;
   top: 20vh;
   font-family: 'Poppins', sans-serif;
 
   font-size: smaller;
   font-weight: 999;
   text-wrap: normal;
-  max-width: 7vw;
-  max-height: 25vh;
+  width: 15vw;
+  height: 25vh;
   overflow: hidden;
   overflow-y: auto;
-
-  * {
-    margin: -.2vh;
-  }
+  padding: 1vh;
 }
 
 label div {
@@ -228,5 +225,31 @@ label div {
 
   .white-card {
     font-size: small;
+    height: 50%;
+    max-height: 90%;
+
+    &:hover {
+      width: auto;
+    }
   }
+}
+
+.chat-box {
+  overflow: hidden;
+  overflow-y: auto;
+
+  p {
+    margin: 0.3vh;
+  }
+
+  div {
+    margin: 1vh;
+  }
+}
+
+.kick {
+  height: 2vh;
+  width: 3vh;
+  padding: 1vh;
+  border-radius: 1vh;
 }

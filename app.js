@@ -40,6 +40,21 @@ io.on('connection', async (socket) => {
         delete games[game];
     }
 
+    function removePlayer(user) {
+        if(games[users[user].game].host == user) {
+            io.to(users[user].game).emit('redirect', '/');
+            return gameCleanup(users[user].game);
+        }
+
+        delete games[users[user].game].players[user];
+
+        games[users[user].game].joined = games[users[user].game].joined.filter(u => u !== user);
+        games[users[user].game].selected = games[users[user].game].selected.filter(u => u.id !== user);
+        games[users[user].game].selectedUsers = games[users[user].game].selectedUsers.filter(u => u !== user);
+
+        users[user].game = false;
+    }
+
     socket.on('online', async (data) => {
         if(!users[data.id]) users[data.id] = {
             username: data.username,
@@ -61,7 +76,7 @@ io.on('connection', async (socket) => {
     })
 
     socket.on('start-game', async (data) => {
-        const { id, cah, cr, settings } = data;
+        const { id, cah, cr, settings, password } = data;
 
         if(!id || (id && !users[id])) return respond('Something went wrong! No need to reload (yet) wait a moment and try again. ' +
             'If it doesn\'t work again, then reload. If the issue persists please contact the webmaster at ' +
@@ -111,11 +126,13 @@ io.on('connection', async (socket) => {
         }
 
         if(settings[0]) {
-            var percent = Math.floor(cards.responses.length * (0.45));
+            var percent = Math.floor(cards.responses.length * (0.25));
             for(var i = 0; i < percent; i++) {
                 cards.responses.push(blank);
             }
         }
+
+        if(!settings[1]) settings[1] = 10;
 
         games[join] = {
             cards,
@@ -131,7 +148,8 @@ io.on('connection', async (socket) => {
             selected: [],
             selectedUsers: [],
             picking: false,
-            timeout: settings[2]
+            messages: [],
+            password
         }
 
         games[join].players[id] = { id, username: users[id].username, hand: [], points: 0 }
@@ -143,11 +161,14 @@ io.on('connection', async (socket) => {
     });
 
     socket.on('join-game', (data) => {
-        const { code, id } = data;
+        const { code, id, password } = data;
         if(!users[id]) return respond('Something went wrong! Try reloading');
         if(users[id].game) return socket.emit('redirect', '/game/'+users[id].game);
         if(!games[code.toUpperCase()]) return respond('Invalid game, please check that you have the right code');
         if(games[code.toUpperCase()].started) return respond('That game has already started!');
+
+        if(games[code.toUpperCase()].password && games[code.toUpperCase()].password !== password)
+            return respond('Invalid password');
 
         users[id].game = code.toUpperCase();
 
@@ -190,22 +211,18 @@ io.on('connection', async (socket) => {
         if(end !== "END") return respond('Invalid entry, make sure to use all caps');
 
         if(!games[users[user].game]) return respond('You\'re not in a game!');
-        if(games[users[user].game].host == user) {
-            io.to(users[user].game).emit('redirect', '/');
-            return gameCleanup(users[user].game);
-        }
 
-        delete games[users[user].game].players[user];
-        var indexOne = games[users[user].game].joined.indexOf(user);
+        removePlayer(user);
+    });
 
-        games[users[user].game].joined.splice(indexOne, 1);
+    socket.on('kick', (data) => {
+        const { user, p } = data;
+        if(!users[user] || !users[p]) return respond('That user does not exist!');
+        if(!games[users[user].game]) return respond('You\'re not in a game!');
+        if(!games[users[user].game].players[p]) return respond('That user isn\'t in that game!');
+        if(games[users[user].game].host !== user) return respond('You\'re not that game\'s host!');
 
-        if(games[users[user].game].selectedUsers.indexOf(user) > -1) {
-            var indexTwo = games[users[user].game].selectedUsers.indexOf(user);
-            games[users[user].game].selectedUsers.splice(indexOne, 1);
-
-            games[users[user].game].selected = games[users[user].game].selected.filter(u => u.id !== user);
-        }
+        removePlayer(p);
     });
 
     socket.on('confirm-selection', async (data) => {
@@ -283,14 +300,30 @@ io.on('connection', async (socket) => {
             const points = Math.max(...a.map(p => p.points));
 
             const winners = a.filter(p => p.points == points);
-            const formatted = winners.join(' and ').trimEnd();
+            const winnersUsernames = winners.map((w) => w.username);
+            const formatted = winnersUsernames.join(' and ').trimEnd();
+
+            console.log(winners, formatted)
 
             io.to(games[game].code).emit('alert', formatted + ' won!');
             io.to(games[game].code).emit('redirect', '/');
 
             gameCleanup(game);
         }
-    })
+    });
+
+    socket.on('chat', async (data) => {
+        const { msg, game, user } = data;
+        if(!games[game]) return respond('Invalid game');
+        if(!users[user]) return respond('Something went wrong, please try reloading');
+
+        const message = {
+            msg,
+            user
+        }
+
+        games[game].messages.push(message)
+    });
 });
 
 // API
@@ -338,8 +371,17 @@ app.post('/api/game-info', async (req, res) => {
         host: games[game].host,
         selected: games[game].selected,
         selectedUsers: games[game].selectedUsers,
-        picking: games[game].picking
+        picking: games[game].picking,
+        messages: games[game].messages
     } );
+});
+
+app.post('/api/get-games', async (req, res) => {
+    const gamesToGet = Object.values(games);
+    const gameList = gamesToGet.filter((g) => !g.password);
+    const hosts = gamesToGet.map((g) => Object.values(g.players));
+
+    return res.send({ gameList, hosts: hosts[0] });
 });
 
 httpServer.listen((process.env.port || 80), () => console.log('Listening on ' + (process.env.port || 80)));

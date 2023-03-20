@@ -15,6 +15,7 @@ const Navbar = () => {
 
     useEffect( () => {
         (async () => {
+            localStorage.setItem('loading', true);
             const getData = await fetch('/api/get-data', {
                 method: 'POST',
                 headers: {
@@ -31,7 +32,8 @@ const Navbar = () => {
                 username: getData.username,
                 id: getData.id
             });
-
+            localStorage.setItem('loading', false);
+            window.dispatchEvent(new Event('storage'));
             setUsername(getData.username);
         })();
     }, []);

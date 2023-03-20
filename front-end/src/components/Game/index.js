@@ -1,7 +1,7 @@
 import './index.scss';
 import Navbar from '../Navbar';
 import { io } from 'socket.io-client';
-import { useState, useEffect } from "react";
+import {useState, useEffect, useRef} from "react";
 import {NavLink} from "react-router-dom";
 
 var selected;
@@ -29,17 +29,23 @@ socket.on('remove-response', () => {
         c.childNodes[1].checked = false;
         c.style.background = '';
         c.classList.remove('.checked');
+        c.parentElement.value = null;
     })
 })
 
 const Game = () => {
     const init = (
         <>
+            <title>Card Me Daddy | Playing</title>
             Loading . . .
         </>
     );
 
     const [game, setGame] = useState(init);
+
+    const kickPlayer = (p, user) => {
+        socket.emit('kick', { p, user });
+    }
 
     useEffect(() => {
         (async () => {
@@ -97,7 +103,12 @@ const Game = () => {
                                 c.checked = false;
                                 c.classList.remove('checked');
                                 c.background = '';
+                                console.log(selected);
+
                                 selected[c.parentElement.value] = text;
+
+                                console.log(selected);
+                                c.parentElement.value = null;
                             });
 
                             socket.emit('confirm-selection', { selected, user });
@@ -157,14 +168,29 @@ const Game = () => {
                     </div>
                     <div className={'wrapper-bottom'}>
                         <div className={ 'chat' }>
-                            <div className={'chat-box'}></div>
-                            <form>
-                                <input type={'text'} placeholder={'Chat'}/>
+                            <div className={'chat-box'}>
+                                <div>
+                                    {
+                                        game.messages.map((m) =>
+                                            (<div><p>
+                                                { game.players.filter((p) => p.id == m.user)[0].username }
+                                            </p>
+                                                <p> { m.msg } </p>
+                                            </div>)) }</div>
+                            </div>
+                            <form onSubmit={(e) => {
+                                e.preventDefault();
+                                const msg = document.getElementById('chat').value;
+                                const parseCode = window.location.href.split('/');
+                                socket.emit('chat', { msg, game: parseCode[parseCode.length - 1], user: localStorage.getItem('id') });
+                            }
+                            }>
+                                <input type={'text'} placeholder={'Chat'} id={'chat'} />
                             </form>
                         </div>
                         <div className={ 'points' }>
                             <p>Points:</p>
-                            { game.players.map((p) => (<>{ p.username }: { p.points }<br /></>)) }
+                            { game.players.map((p) => (<><> { game.host == user ? <a className={ 'kick' } onClick={() => { kickPlayer(p.id, user) } }>Kick Player</a> : <></> } </>{ p.username }: { p.points }<br /></>)) }
                         </div>
                         <div className={ 'hand' }>
 
