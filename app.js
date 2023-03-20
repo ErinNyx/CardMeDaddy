@@ -303,8 +303,6 @@ io.on('connection', async (socket) => {
             const winnersUsernames = winners.map((w) => w.username);
             const formatted = winnersUsernames.join(' and ').trimEnd();
 
-            console.log(winners, formatted)
-
             io.to(games[game].code).emit('alert', formatted + ' won!');
             io.to(games[game].code).emit('redirect', '/');
 
