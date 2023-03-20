@@ -36,7 +36,6 @@ socket.on('remove-response', () => {
 const Game = () => {
     const init = (
         <>
-            <title>Card Me Daddy | Playing</title>
             Loading . . .
         </>
     );

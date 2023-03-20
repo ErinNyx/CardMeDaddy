@@ -21,7 +21,6 @@ const Homepage = () => {
     const page = (
         <div className={ 'home' }>
             <div className={ 'game-options' }>
-                <title>Card Me Daddy</title>
                 <NavLink to={ '/create-game' }>+ Create Game</NavLink>
 
                 <NavLink to={ '/join' }>+ Join Game</NavLink>

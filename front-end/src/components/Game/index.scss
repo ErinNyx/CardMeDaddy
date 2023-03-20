@@ -60,7 +60,7 @@ button {
   padding: 2vh;
 
   p {
-    font-size: smaller;
+    font-size: .8vw;
     font-weight: 999;
     font-family: 'Poppins', sans-serif;
   }
@@ -115,7 +115,7 @@ label.white-card {
 
 .daddy {
   font-family: 'Great Vibes', cursive;
-  font-size: 1.2em;
+  font-size: 1vw;
   font-weight: 999;
 }
 
@@ -183,7 +183,7 @@ label.white-card {
   top: 20vh;
   font-family: 'Poppins', sans-serif;
 
-  font-size: smaller;
+  font-size: 1vw;
   font-weight: 999;
   text-wrap: normal;
   width: 15vw;
@@ -197,7 +197,7 @@ label div {
   height: 95%;
   width: 95%;
   padding: 2%;
-  font-size: small;
+  font-size: .8vw;
 }
 
 .end {
@@ -224,12 +224,12 @@ label div {
   flex-direction: row;
 
   .white-card {
-    font-size: small;
+    font-size: .8vw;
     height: 50%;
     max-height: 90%;
 
     &:hover {
-      width: auto;
+      width: 25%;
     }
   }
 }
