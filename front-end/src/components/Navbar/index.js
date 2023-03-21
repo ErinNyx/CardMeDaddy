@@ -44,7 +44,9 @@ const Navbar = () => {
                 Card Me Daddy
             </NavLink>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-
+            <script async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8154425255494501"
+                    crossOrigin="anonymous"></script>
             <NavLink to={'https://ko-fi.com/erinargo'} target="_blank" rel="noopener noreferrer"><i className="fa fa-coffee" id={ 'coffee' } aria-hidden="true" /></NavLink>
 
             <form className={'change-name'} onSubmit={ (e) => {

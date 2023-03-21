@@ -46,6 +46,9 @@ const Join = () => {
     return (
         <>
             <Navbar />
+            <script async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8154425255494501"
+                    crossOrigin="anonymous"></script>
             <div className={ 'game-options' }>
                 <form id={ 'join-form' } onSubmit={ (e) => {
                     e.preventDefault();
