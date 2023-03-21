@@ -9,9 +9,9 @@
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/build/asset-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.bdcb8e68.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.bdcb8e68.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.bdcb8e68.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.9c9160d8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.9c9160d8.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.9c9160d8.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/node_modules/.cache/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/components/Create Game/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Create Game/index.js" afterDir="false" />
     </list>
@@ -71,7 +71,7 @@
       <workItem from="1678993272837" duration="3371000" />
       <workItem from="1679017625358" duration="3000" />
       <workItem from="1679087056832" duration="57103000" />
-      <workItem from="1679417705124" duration="3850000" />
+      <workItem from="1679417705124" duration="5019000" />
     </task>
     <servers />
   </component>

@@ -140,21 +140,25 @@ io.on('connection', async (socket) => {
         }
 
         if(!settings[1]) settings[1] = 10;
+        if(!settings[2]) settings[2] = 5;
 
-        const players = games[join].players ? games[join].players : [];
-        const joined = games[join].joined ? games[join].joined : [];
+        let requiredCards = ((settings[2] * 10) * settings[1]);
+
+        if(cards.responses.length < requiredCards)
+            return respond('Not enough response cards! You need to add ' + (requiredCards - cards.responses.length) + ' more.');
 
         games[join] = {
             cards,
-            players,
+            players: [],
             czar: '',
             czarName: '',
             rounds: settings[1],
+            maxPlayers: settings[2],
             round: 1,
             host: id,
             started: false,
             code: join,
-            joined,
+            joined: [],
             selected: [],
             selectedUsers: [],
             picking: false,
@@ -178,6 +182,7 @@ io.on('connection', async (socket) => {
         if(users[id].game) return socket.emit('redirect', '/game/'+users[id].game);
         if(!games[code.toUpperCase()]) return respond('Invalid game, please check that you have the right code');
         if(games[code.toUpperCase()].started) return respond('That game has already started!');
+        if(games[code.toUpperCase()].joined.length >= games[code.toUpperCase()].maxPlayers) return respond('That game has enough players.');
 
         if(games[code.toUpperCase()].password && games[code.toUpperCase()].password !== password)
             return respond('Invalid password');
@@ -195,10 +200,6 @@ io.on('connection', async (socket) => {
 
         if(!games[code]) return respond('Something went wrong! Try reloading');
         if(games[code].host !== user) return respond('Something went wrong! Try reloading!');
-        var requiredCards = ((games[code].joined.length * 10) * games[code].rounds);
-
-        if(games[code].cards.responses.length < requiredCards)
-            return respond('Not enough response cards! You need to add ' + (requiredCards - games[code].cards.responses.length) + ' more.');
 
         games[code].cards.responses = games[code].cards.responses.sort(() => 0.5 - Math.random());
         games[code].cards.calls = games[code].cards.calls.sort(() => 0.5 - Math.random());

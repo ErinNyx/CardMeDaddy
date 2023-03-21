@@ -42,6 +42,7 @@ const Create = () => {
             <form className={'settings'} onSubmit={(e) => e.preventDefault()}>
                 <label name={ 'blank' }><input type={ 'checkbox' }/>Add Blank Cards?</label>
                 <label name={ 'rounds' }>Enter number of rounds: <input type={'number'} placeholder={'10'} /></label>
+                <label name={ 'max-players' }>Enter Max number of Players: <input type={'number'} placeholder={'5'} /></label>
             </form>
             <a className={ 'cr-add' }>
                 <input type={ 'text' } placeholder={'Custom CR Cast decks can be added with the deck code'} id={ 'cr-cast-input' } />
@@ -136,12 +137,17 @@ const Create = () => {
                         <input type={ 'submit' } value={ 'Start Game!' } onClick={ async (e) => {
                             e.preventDefault();
 
+                            let accept = window.confirm('Are you sure you want to continue with these settings? You can\'t go back and change them.');
+
+                            if(!accept) return;
+
                             const cah = [], cr =[], settings = [], password = document.getElementById('pass').value
                                 ? document.getElementById('pass').value : false;
                             let set = document.querySelectorAll('.settings label input');
 
                             settings.push(set[0].checked);
                             settings.push(set[1].value);
+                            settings.push(set[2].value);
 
                             document.querySelectorAll('.cah').forEach((d) => {
                                 if(d.checked == true) cah.push(d.value);
