@@ -235,12 +235,11 @@ io.on('connection', async (socket) => {
         const testForUser = games[game].selectedUsers;
         if(testForUser.indexOf(user) !== -1) return respond('You\'ve already selected!');
         if(games[game].czar == user) return respond('You\'re the Daddy!');
-        if(games[game].cards.calls[0].pick !== selected.length) return respond('Please pick the right number of cards');
-
+        if(games[game].cards.calls[0].pick !== selected.map(c => c.order).length) return respond('Please pick the right number of cards');
 
         const option = {
             id: user,
-            selected,
+            selected: selected.sort((a, b) => a.order - b.order),
             blanks
         }
 

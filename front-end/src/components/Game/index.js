@@ -105,13 +105,18 @@ const Game = () => {
                                 c.checked = false;
                                 c.classList.remove('checked');
                                 c.background = '';
-                                console.log(selected);
+
                                 if(c.parentElement.value == undefined) {
                                     selected = [];
                                     return;
                                 }
 
-                                selected[c.parentElement.value] = text;
+                                const card = {
+                                    order: c.parentElement.value,
+                                    text
+                                }
+
+                                selected.push(card);
 
                                 c.parentElement.value = undefined;
                             });
