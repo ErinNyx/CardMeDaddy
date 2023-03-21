@@ -89,29 +89,35 @@ const Game = () => {
                             <p className={'pick'}>Pick: { game.cards.calls[0].pick }</p>
                         }</div>
                         <a className={'confirm'} onClick={ async () => {
-                            const selected = [];
+                            let selected = [];
 
                             if(game.czar == user && game.picking) {
                                 return socket.emit('round-winner', { winner: document.querySelectorAll('.selected .checked')[0].attributes.name.value, user });
                             }
+                            let blanks = 0;
 
                             document.querySelectorAll('.checked div').forEach(c => {
-                                var text = c.innerHTML == '_' ? prompt('Enter your text for card #'+ c.parentElement.value) : c.innerHTML;
-
+                                var text = c.innerHTML == '_' ? prompt('Enter your text for card #'+ (c.parentElement.value + 1)) : c.innerHTML;
                                 if(c.innerHTML == '_' && !text) return;
+
+                                if(c.innerHTML == '_') blanks++;
+
                                 c.checked = false;
                                 c.classList.remove('checked');
                                 c.background = '';
                                 console.log(selected);
-                                if(c.parentElement.value == null) return;
+                                if(c.parentElement.value == undefined) {
+                                    selected = [];
+                                    return;
+                                }
 
                                 selected[c.parentElement.value] = text;
 
-                                console.log(selected);
-                                c.parentElement.value = null;
+                                c.parentElement.value = undefined;
                             });
 
-                            socket.emit('confirm-selection', { selected, user });
+                            socket.emit('confirm-selection', { selected, user, blanks });
+                            selected = [];
                         } }>Confirm Selection</a>
 
                         <div className={'selected'}>
@@ -129,7 +135,7 @@ const Game = () => {
                                     document.querySelectorAll('.checked')[0].classList.remove('checked');
                                 }
 
-                                e.target.parentElement.value ? e.target.parentElement.value = null : e.target.parentElement.value = checked.length;
+                                e.target.checked ? e.target.parentElement.value = undefined : e.target.parentElement.value = checked.length;
 
                                 e.target.checked ?
                                     e.target.parentElement.classList.add('checked') :
@@ -156,7 +162,7 @@ const Game = () => {
                                                 document.querySelectorAll('.checked')[0].classList.remove('checked');
                                             }
 
-                                            e.target.parentElement.value ? e.target.parentElement.value = null : e.target.parentElement.value = checked.length;
+                                            e.target.parentElement.value ? e.target.parentElement.value = undefined : e.target.parentElement.value = checked.length;
 
                                             e.target.checked ?
                                                 e.target.parentElement.classList.add('checked') :

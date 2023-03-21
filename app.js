@@ -226,7 +226,7 @@ io.on('connection', async (socket) => {
     });
 
     socket.on('confirm-selection', async (data) => {
-        const { selected, user } = data;
+        const { selected, user, blanks } = data;
 
         if(!games[users[user].game]) return respond('You\'re not in a game!');
 
@@ -237,9 +237,11 @@ io.on('connection', async (socket) => {
         if(games[game].czar == user) return respond('You\'re the Daddy!');
         if(games[game].cards.calls[0].pick !== selected.length) return respond('Please pick the right number of cards');
 
+
         const option = {
             id: user,
-            selected
+            selected,
+            blanks
         }
 
         games[game].selected.push(option);
@@ -272,6 +274,12 @@ io.on('connection', async (socket) => {
                             games[game].selected[i].selected[j] !== c.text);
 
                     games[game].players[games[game].selected[i].id].hand.push(games[game].cards.responses.splice(0,1)[0]);
+                    for(var k = 0; k < games[game].selected[i].blanks; k++) {
+                        var index;
+                        if(games[game].players[games[game].selected[i].id].hand.indexOf('_') > -1)
+                            index = games[game].players[games[game].selected[i].id].hand.indexOf('_');
+                        games[game].players[games[game].selected[i].id].hand.splice(index, 1);
+                    }
                 }
         }
 
