@@ -270,7 +270,7 @@ io.on('connection', async (socket) => {
                 for(var j = 0; j < games[game].selected[i].selected.length; j++) {
                     games[game].players[games[game].selected[i].id].hand =
                         games[game].players[games[game].selected[i].id].hand.filter(c =>
-                            games[game].selected[i].selected[j] !== c.text);
+                            games[game].selected[i].selected[j].text !== c.text);
 
                     games[game].players[games[game].selected[i].id].hand.push(games[game].cards.responses.splice(0,1)[0]);
                     for(var k = 0; k < games[game].selected[i].blanks; k++) {
