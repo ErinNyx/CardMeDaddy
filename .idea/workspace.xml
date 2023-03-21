@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cbd86f9a-8547-4a55-8efb-f0fdbc5d43bf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.822f6dff.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.822f6dff.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.822f6dff.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/node_modules/.cache/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Create Game/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Create Game/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Game/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Game/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Homepage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Homepage/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Join Game/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Join Game/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/Navbar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Navbar/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="cbd86f9a-8547-4a55-8efb-f0fdbc5d43bf" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,7 +60,7 @@
       <workItem from="1678990387956" duration="657000" />
       <workItem from="1678993272837" duration="3371000" />
       <workItem from="1679017625358" duration="3000" />
-      <workItem from="1679087056832" duration="55724000" />
+      <workItem from="1679087056832" duration="56484000" />
     </task>
     <servers />
   </component>
