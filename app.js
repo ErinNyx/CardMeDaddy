@@ -90,9 +90,14 @@ io.on('connection', async (socket) => {
 
         var getCah;
         if(cah[0]) {
-            getCah = await fetch('https://www.restagainsthumanity.com/api/v2/cards?packs='+cah.join(',')).then((res) => res.json());
-            cards.calls = getCah.black;
-            cards.responses = getCah.white;
+            try {
+                getCah = await fetch('https://www.restagainsthumanity.com/api/v2/cards?packs='+cah.join(',')).then((res) => res.json());
+                cards.calls = getCah.black;
+                cards.responses = getCah.white
+            } catch(e) {
+                if(e) console.log(e);
+                return respond('Something went wrong! Please contact the webmaster at erinjamieargo@gmail.com');
+            }
         }
 
         for(var i in cr) {
@@ -179,11 +184,6 @@ io.on('connection', async (socket) => {
     })
 
     socket.on('launch-game', (data) => {
-        /* TODO: CHECK THAT ENOUGH PLAYERS ARE IN
-            ADD OPTIONS FOR BLANK CARDS, MAX PLAYERS, PLAYER TIMEOUT
-
-         */
-
         const { code, user } = data;
 
         if(!games[code]) return respond('Something went wrong! Try reloading');
