@@ -133,6 +133,7 @@ const Game = () => {
                                         .style.background = '';
                                     document.querySelectorAll('.checked input')[0].checked = false;
                                     document.querySelectorAll('.checked')[0].classList.remove('checked');
+                                    document.querySelectorAll('.checked')[0].value = undefined;
                                 }
 
                                 e.target.checked ? e.target.parentElement.value = undefined : e.target.parentElement.value = checked.length;
@@ -160,6 +161,7 @@ const Game = () => {
                                                     .style.background = '';
                                                 document.querySelectorAll('.checked input')[0].checked = false;
                                                 document.querySelectorAll('.checked')[0].classList.remove('checked');
+                                                document.querySelectorAll('.checked')[0].value = undefined;
                                             }
 
                                             e.target.parentElement.value ? e.target.parentElement.value = undefined : e.target.parentElement.value = checked.length;
