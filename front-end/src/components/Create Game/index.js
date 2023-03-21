@@ -74,9 +74,7 @@ const Create = () => {
         if(pack.error > 1) return alert('Invalid pack, please check that you entered the right code.');
 
         const packID = ( <label className={ 'pack-container' }>
-            <input type={ 'checkbox' } className={'cr'} value={ id } checked={true} onClick={(e) => {
-            e.target.checked ? e.target.checked = false : e.target.checked = true;
-        } } /> { pack.name }: { pack.description } </label>);
+            <input type={ 'checkbox' } className={'cr'} value={ id } onLoad={(e) => e.target.checked = true} /> { pack.name }: { pack.description } </label>);
         const add = (
             <>
                 { crPacks }

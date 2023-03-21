@@ -82,7 +82,9 @@ io.on('connection', async (socket) => {
             'If it doesn\'t work again, then reload. If the issue persists please contact the webmaster at ' +
             'erinjamieargo@gmail.com');
 
-        if (users[id].game) return respond('You\'re already in a game!');
+        if (users[id].game) {
+            if(users[id].game.host !== id) return respond('You\'re already in a game!');
+        }
         var cards = {
             calls: [],
             responses: []
@@ -139,9 +141,12 @@ io.on('connection', async (socket) => {
 
         if(!settings[1]) settings[1] = 10;
 
+        const players = games[join].players ? games[join].players : [];
+        const joined = games[join].joined ? games[join].joined : [];
+
         games[join] = {
             cards,
-            players: [],
+            players,
             czar: '',
             czarName: '',
             rounds: settings[1],
@@ -149,12 +154,14 @@ io.on('connection', async (socket) => {
             host: id,
             started: false,
             code: join,
-            joined: [],
+            joined,
             selected: [],
             selectedUsers: [],
             picking: false,
             messages: [],
-            password
+            password,
+            cah,
+            cr
         }
 
         games[join].players[id] = { id, username: users[id].username, hand: [], points: 0 }
