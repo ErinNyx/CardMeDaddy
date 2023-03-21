@@ -86,7 +86,7 @@ const Game = () => {
                             socket.emit('end', { end, user });
                         } }>Leave Game</a>) }
                         <div className={ 'call' } className={'black-card'}>{ <p> { game.cards.calls[0].text.split("_").join("＿＿") } </p> } {
-                            <p className={'pick'}>Pick: { game.cards.calls[0].pick.text }</p>
+                            <p className={'pick'}>Pick: { game.cards.calls[0].pick }</p>
                         }</div>
                         <a className={'confirm'} onClick={ async () => {
                             let selected = [];
@@ -127,7 +127,7 @@ const Game = () => {
 
                         <div className={'selected'}>
                             { selected ? selected.selections.map((s) => (
-                                <label className={ 'white-card' } name={ s.id }>{ s.selected.map((c, i) => <>Card { i+1 }: { c }<input type={'checkbox'} onChange={ (e) => {
+                                <label className={ 'white-card' } name={ s.id }>{ s.selected.map((c, i) => <>Card { i+1 }: { c.text }<input type={'checkbox'} onChange={ (e) => {
                                     e.target.checked ?
                                         e.target.parentElement.style.background = '#ff8352'
                                         : e.target.parentElement.style.background = '';
