@@ -103,6 +103,7 @@ const Game = () => {
                                 c.classList.remove('checked');
                                 c.background = '';
                                 console.log(selected);
+                                if(c.parentElement.value == null) return;
 
                                 selected[c.parentElement.value] = text;
 
