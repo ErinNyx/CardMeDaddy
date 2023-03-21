@@ -86,7 +86,7 @@ const Game = () => {
                             socket.emit('end', { end, user });
                         } }>Leave Game</a>) }
                         <div className={ 'call' } className={'black-card'}>{ <p> { game.cards.calls[0].text.split("_").join("＿＿") } </p> } {
-                            <p className={'pick'}>Pick: { game.cards.calls[0].pick }</p>
+                            <p className={'pick'}>Pick: { game.cards.calls[0].pick.text }</p>
                         }</div>
                         <a className={'confirm'} onClick={ async () => {
                             let selected = [];
