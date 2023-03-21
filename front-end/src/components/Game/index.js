@@ -27,9 +27,9 @@ socket.on('remove-response', () => {
 
     document.querySelectorAll('.checked').forEach((c) => {
         c.childNodes[1].checked = false;
-        c.style.background = '';
+        c.target.parentElement.style.background = '';
         c.classList.remove('.checked');
-        c.parentElement.value = null;
+        c.parentElement.value = undefined;
     })
 })
 
@@ -128,9 +128,9 @@ const Game = () => {
                         <div className={'selected'}>
                             { selected ? selected.selections.map((s) => (
                                 <label className={ 'white-card' } name={ s.id }>{ s.selected.map((c, i) => <>Card { i+1 }: { c }<input type={'checkbox'} onChange={ (e) => {
-                                e.target.parentElement.style.background == '' ?
-                                    e.target.parentElement.style.background = '#ff8352'
-                                    : e.target.parentElement.style.background = '';
+                                    e.target.checked ?
+                                        e.target.parentElement.style.background = '#ff8352'
+                                        : e.target.parentElement.style.background = '';
 
                                 const checked = document.querySelectorAll('.checked');
                                 if(checked.length >= game.cards.calls[0].pick) {
@@ -140,8 +140,6 @@ const Game = () => {
                                     document.querySelectorAll('.checked div')[0].parentElement.value = undefined;
                                     document.querySelectorAll('.checked')[0].classList.remove('checked');
                                 }
-
-                                console.log(checked.length)
 
                                 e.target.checked ? e.target.parentElement.value = undefined : e.target.parentElement.value = checked.length;
 
@@ -158,7 +156,7 @@ const Game = () => {
                                     p.id == user ? (<>{
                                         p.hand
                                         .map((r) => (<label className={'white-card'}><div>{ r.text }</div><input type={'checkbox'} onChange={ (e) => {
-                                            e.target.parentElement.style.background == '' ?
+                                            e.target.checked ?
                                                 e.target.parentElement.style.background = '#ff8352'
                                                 : e.target.parentElement.style.background = '';
 
