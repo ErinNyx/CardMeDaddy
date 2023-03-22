@@ -133,7 +133,7 @@ io.on('connection', async (socket) => {
         }
 
         if(settings[0]) {
-            var percent = Math.floor(cards.responses.length * (0.25));
+            var percent = Math.floor(cards.responses.length * (0.15));
             for(var i = 0; i < percent; i++) {
                 cards.responses.push(blank);
             }
