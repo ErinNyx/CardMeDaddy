@@ -133,7 +133,7 @@ const Game = () => {
                                         : e.target.parentElement.style.background = '';
 
                                 const checked = document.querySelectorAll('.checked');
-                                if(checked.length >= game.cards.calls[0].pick) {
+                                if(checked.length > game.cards.calls[0].pick) {
                                     document.querySelectorAll('.checked')[0]
                                         .style.background = '';
                                     document.querySelectorAll('.checked input')[0].checked = false;
