@@ -133,7 +133,7 @@ io.on('connection', async (socket) => {
         }
 
         if(settings[0]) {
-            var percent = Math.floor(cards.responses.length * (0.15));
+            var percent = Math.floor(cards.responses.length * (0.25));
             for(var i = 0; i < percent; i++) {
                 cards.responses.push(blank);
             }
@@ -283,7 +283,7 @@ io.on('connection', async (socket) => {
                     games[game].players[games[game].selected[i].id].hand.push(games[game].cards.responses.splice(0,1)[0]);
                     for(var k = 0; k < games[game].selected[i].blanks; k++) {
                         var index;
-                        if(games[game].players[games[game].selected[i].id].hand.indexOf('_') > -1)
+                        if(games[game].players[games[game].selected[i].id].hand.indexOf('_') !== -1)
                             index = games[game].players[games[game].selected[i].id].hand.indexOf('_');
                         games[game].players[games[game].selected[i].id].hand.splice(index, 1);
                     }

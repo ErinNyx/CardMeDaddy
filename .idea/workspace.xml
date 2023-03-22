@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cbd86f9a-8547-4a55-8efb-f0fdbc5d43bf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/build/asset-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.e89e322d.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.e89e322d.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.e89e322d.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/build/static/css/main.64adfbfb.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/build/static/css/main.64adfbfb.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.6384de6b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.6384de6b.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/build/static/js/main.6384de6b.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/node_modules/.cache/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/components/Game/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Game/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/components/Game/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/Game/index.scss" afterDir="false" />
@@ -80,7 +82,7 @@
       <workItem from="1679426425253" duration="66000" />
       <workItem from="1679427022900" duration="83000" />
       <workItem from="1679427251701" duration="59000" />
-      <workItem from="1679443642629" duration="2829000" />
+      <workItem from="1679443642629" duration="4914000" />
     </task>
     <servers />
   </component>
