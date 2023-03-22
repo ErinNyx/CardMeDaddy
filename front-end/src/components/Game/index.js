@@ -165,12 +165,12 @@ const Game = () => {
                                                 document.querySelectorAll('.checked')[0]
                                                     .style.background = '';
                                                 document.querySelectorAll('.checked input')[0].checked = false;
-                                                document.querySelectorAll('.checked div')[0].parentElement.value = undefined;
+                                                document.querySelectorAll('.checked')[0].value = undefined;
                                                 document.querySelectorAll('.checked')[0].classList.remove('checked');
                                             }
-
-                                            e.target.parentElement.value ? e.target.parentElement.value = undefined : e.target.parentElement.value = checked.length;
-
+                                            console.log(e.target.parentElement)
+                                            /*e.target.parentElement.value ? e.target.parentElement.value = undefined :*/ e.target.parentElement.value = checked.length;
+                                            console.log(e.target.parentElement)
                                             e.target.checked ?
                                                 e.target.parentElement.classList.add('checked') :
                                                 e.target.parentElement.classList.remove('checked');
@@ -196,6 +196,7 @@ const Game = () => {
                                 const msg = document.getElementById('chat').value;
                                 const parseCode = window.location.href.split('/');
                                 socket.emit('chat', { msg, game: parseCode[parseCode.length - 1], user: localStorage.getItem('id') });
+                                document.getElementById('chat').value = '';
                             }
                             }>
                                 <input type={'text'} placeholder={'Chat'} id={'chat'} />
