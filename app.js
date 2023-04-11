@@ -347,10 +347,8 @@ app.post('/api/get-data', async (req, res) => {
         return res.send(users[req.body.id]);
     }
 
-    const name = await fetch('https://username-generator-api.glique.repl.co/gen', {
-        method: 'GET'
-    }).then((res) => res.json());
-    const username = name.username.split(" ")[0];
+    const name = await fetch('https://randomuser.me/api/').then((res) => res.json());
+    const username = name.results[0].login.username;
     const id = await bcrypt.hash(username, 10);
 
     const user = { username, id };
