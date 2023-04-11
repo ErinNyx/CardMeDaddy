@@ -64,9 +64,9 @@ io.on('connection', async (socket) => {
     });
 
     socket.on('change-username', (data) => {
-       users[data.id].username = data.username;
+        users[data.id].username = data.username;
 
-       if(users[data.id].game) games[users[data.id].game].players[data.id].username = data.username;
+        if(users[data.id].game) games[users[data.id].game].players[data.id].username = data.username;
     });
 
     socket.on('game-connection', async (data) => {
@@ -275,20 +275,21 @@ io.on('connection', async (socket) => {
         games[game].players[winner].points += 1;
 
         for(var i in games[game].selected) {
-                for(var j = 0; j < games[game].selected[i].selected.length; j++) {
-                    games[game].players[games[game].selected[i].id].hand =
-                        games[game].players[games[game].selected[i].id].hand.filter(c =>
-                            games[game].selected[i].selected[j].text !== c.text);
+            for(var j = 0; j < games[game].selected[i].selected.length; j++) {
+                games[game].players[games[game].selected[i].id].hand =
+                    games[game].players[games[game].selected[i].id].hand.filter(c =>
+                        games[game].selected[i].selected[j].text !== c.text);
 
-                    for(var k = 0; k <= games[game].selected[i].blanks; k++) {
-                        var index;
-                        if(games[game].players[games[game].selected[i].id].hand.indexOf('_') !== -1)
-                            index = games[game].players[games[game].selected[i].id].hand.indexOf('_');
+                games[game].players[games[game].selected[i].id].hand.push(games[game].cards.responses.splice(0,1)[0]);
+
+                for(var k = 0; k <= games[game].selected[i].blanks; k++) {
+                    var index;
+                    if(games[game].players[games[game].selected[i].id].hand.indexOf('_') !== -1) {
+                        index = games[game].players[games[game].selected[i].id].hand.indexOf('_');
                         games[game].players[games[game].selected[i].id].hand.splice(index, 1);
                     }
-
-                    games[game].players[games[game].selected[i].id].hand.push(games[game].cards.responses.splice(0,1)[0]);
                 }
+            }
         }
 
         games[game].cards.calls.shift();
