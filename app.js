@@ -281,12 +281,13 @@ io.on('connection', async (socket) => {
                             games[game].selected[i].selected[j].text !== c.text);
 
                     games[game].players[games[game].selected[i].id].hand.push(games[game].cards.responses.splice(0,1)[0]);
-                    for(var k = 0; k < games[game].selected[i].blanks; k++) {
-                        var index;
-                        if(games[game].players[games[game].selected[i].id].hand.indexOf('_') !== -1)
-                            index = games[game].players[games[game].selected[i].id].hand.indexOf('_');
-                        games[game].players[games[game].selected[i].id].hand.splice(index, 1);
-                    }
+                }
+
+                for(var k = 0; k < games[game].selected[i].blanks; k++) {
+                    var index;
+                    if(games[game].players[games[game].selected[i].id].hand.indexOf('_') !== -1)
+                        index = games[game].players[games[game].selected[i].id].hand.indexOf('_');
+                    games[game].players[games[game].selected[i].id].hand.splice(index, 1);
                 }
         }
 
@@ -346,10 +347,8 @@ app.post('/api/get-data', async (req, res) => {
         return res.send(users[req.body.id]);
     }
 
-    const name = await fetch('https://username-generator-api.glique.repl.co/gen', {
-        method: 'GET'
-    }).then((res) => res.json());
-    const username = name.username.split(" ")[0];
+    const name = await fetch('https://randomuser.me/api/').then((res) => res.json());
+    const username = name.results[0].login.username;
     const id = await bcrypt.hash(username, 10);
 
     const user = { username, id };
