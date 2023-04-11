@@ -72,6 +72,8 @@ const Create = () => {
             })
         }).then((res) => res.json());
 
+        if(pack.error && pack.msg) return alert(pack.msg);
+
         if(pack.error > 1) return alert('Invalid pack, please check that you entered the right code.');
 
         const packID = ( <label className={ 'pack-container' }>

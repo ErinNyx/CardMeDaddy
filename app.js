@@ -283,7 +283,7 @@ io.on('connection', async (socket) => {
                     games[game].players[games[game].selected[i].id].hand.push(games[game].cards.responses.splice(0,1)[0]);
                 }
 
-                for(var k = 0; k < games[game].selected[i].blanks; k++) {
+                for(var k = 0; k <= games[game].selected[i].blanks; k++) {
                     var index;
                     if(games[game].players[games[game].selected[i].id].hand.indexOf('_') !== -1)
                         index = games[game].players[games[game].selected[i].id].hand.indexOf('_');
@@ -359,7 +359,7 @@ app.post('/api/get-data', async (req, res) => {
 app.post('/api/cr-cast', async (req, res) => {
     const { deck } = req.body;
     const getDeck = await fetch('https://api.crcast.cc/v1/cc/decks/' + deck).then((res) => res.json());
-
+    return res.send({ status: 'error', msg: 'CRCast is down :(' });
     res.send(getDeck);
 });
 
