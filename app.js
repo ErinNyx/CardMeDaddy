@@ -281,12 +281,13 @@ io.on('connection', async (socket) => {
                             games[game].selected[i].selected[j].text !== c.text);
 
                     games[game].players[games[game].selected[i].id].hand.push(games[game].cards.responses.splice(0,1)[0]);
-                    for(var k = 0; k < games[game].selected[i].blanks; k++) {
-                        var index;
-                        if(games[game].players[games[game].selected[i].id].hand.indexOf('_') !== -1)
-                            index = games[game].players[games[game].selected[i].id].hand.indexOf('_');
-                        games[game].players[games[game].selected[i].id].hand.splice(index, 1);
-                    }
+                }
+
+                for(var k = 0; k < games[game].selected[i].blanks; k++) {
+                    var index;
+                    if(games[game].players[games[game].selected[i].id].hand.indexOf('_') !== -1)
+                        index = games[game].players[games[game].selected[i].id].hand.indexOf('_');
+                    games[game].players[games[game].selected[i].id].hand.splice(index, 1);
                 }
         }
 
