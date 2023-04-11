@@ -360,7 +360,6 @@ app.post('/api/get-data', async (req, res) => {
 app.post('/api/cr-cast', async (req, res) => {
     const { deck } = req.body;
     const getDeck = await fetch('https://api.crcast.cc/v1/cc/decks/' + deck).then((res) => res.json());
-    return res.send({ status: 'error', msg: 'CRCast is down :(' });
     res.send(getDeck);
 });
 
